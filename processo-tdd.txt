@@ -1,0 +1,15 @@
+O processo Test Driven Development é baseado em um workflow de atividades testes
+e desenvolvimento.
+Começamos desenvolvendo o Function Test, para nos assegurarmos do cumprimento
+das funções desejadas pelo usuário, por parte da aplicação.
+Quando rodamos este teste, há duas opções:
+Caso 01: passar e aplicação não precisar ser refatorada: neste caso voltamos ao
+início do processo, para adicionar novas features.
+Caso 02: não passar, ou passar, porém a aplicação precisar ser refatorada:
+entramos no processo "escrever código mínimo".
+Este processo consiste em, primeiramente, escrever um Unit Test.
+Para este teste o processo é parecido com o primeiro. No Caso 01 aqui, seguimos
+os mesmos passos do Caso 01 do Function Test, porém voltando, aqui, à costrução
+de um novo Unit Test, até que todos estejam prontos. No Caso 02, o procedimento
+também é o mesmo do Caso 02 do Function Test, até que a situação caia no Caso
+01.
