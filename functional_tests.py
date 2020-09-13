@@ -12,7 +12,22 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
 
     def test_can_start_a_list_and_retrieve_it_later(self):
-        ...
+
+        # Maria decidiu utilizar o novo app TODO. Ela entra em sua página principal:
+        self.browser.get('http://localhost:8000')
+
+        # Ela nota que o título da página menciona TODO
+        self.assertIn('To-Do', self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('To-Do', header_text)
+
+        # Ela é convidada a entrar com um item TODO imediatamente
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
+
+        # Ela digita "Estudar testes funcionais" em uma caixa de texto
+        inputbox.send_keys('Estudar testes funcionais')
+
         # Quando ela aperta enter, a página atualiza, e mostra a lista
         # "1: Estudar testes funcionais" como um item da lista TODO
         inputbox.send_keys(Keys.ENTER)
