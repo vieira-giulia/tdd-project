@@ -8,7 +8,6 @@ class HomePageTest(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
-
 class ListViewTest(TestCase):
 
     def test_uses_list_template(self):
@@ -42,7 +41,7 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
 
         self.client.post(
-            f'/lists/{correct_list.id}/add_item',
+            f'/lists/{correct_list.id}/',
             data={'item_text': 'A new item for an existing list'}
         )
 
@@ -51,19 +50,17 @@ class ListViewTest(TestCase):
         self.assertEqual(new_item.text, 'A new item for an existing list')
         self.assertEqual(new_item.list, correct_list)
 
-
     def test_redirects_to_list_view(self):
         other_list = List.objects.create()
         correct_list = List.objects.create()
 
         response = self.client.post(
-            f'/lists/{correct_list.id}/add_item',
+            f'/lists/{correct_list.id}/',
             data={'item_text': 'A new item for an existing list'}
         )
-
         self.assertRedirects(response, f'/lists/{correct_list.id}/')
 
-     def test_validation_errors_end_up_on_lists_page(self):
+    def test_validation_errors_end_up_on_lists_page(self):
         list_ = List.objects.create()
         response = self.client.post(
             f'/lists/{list_.id}/',
@@ -73,7 +70,6 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'list.html')
         expected_error = escape("You can't have an empty list item")
         self.assertContains(response, expected_error)
-
 
 class NewListTest(TestCase):
 
